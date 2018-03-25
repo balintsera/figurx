@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'view/dice.dart';
+import 'view/board.dart';
+
 
 void main() => runApp(new MyApp());
 
@@ -13,7 +15,12 @@ class MyApp extends StatelessWidget {
         appBar: new AppBar(
           title: new Text('Welcome to FigurX'),
         ),
-        body: dice,
+        body: new ListView(
+          children: [
+            dice,
+            new Board(),
+          ],
+        )
       ),
     );
   }
