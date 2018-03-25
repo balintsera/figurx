@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'figure.dart';
 
 class Board extends StatelessWidget{
+  
   @override
   Widget build(BuildContext context) {
     final row = new Row(
@@ -8,10 +10,7 @@ class Board extends StatelessWidget{
         _oneRow('First element'),
         _oneRow('Second element'),
         new Expanded(
-          child: new FittedBox(
-            fit: BoxFit.contain, // otherwise the logo will be tiny
-            child: const FlutterLogo(),
-          ),
+          child: new Figure(),
         ),
       ],
     );
@@ -23,4 +22,5 @@ class Board extends StatelessWidget{
       child: new Text(label, textAlign: TextAlign.center),
     );
   }
+
 }
