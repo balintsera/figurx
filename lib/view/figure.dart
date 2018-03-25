@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class Figure extends StatelessWidget {
-  final String monkey = '\u{1f435}';
+  final String figure;
 
+  Figure(this.figure);
+  
   @override
   Widget build(BuildContext context) {
-    return _circle(monkey);
+    return _circle();
   }
 
-  Container _circle(String figure) {
+  Container _circle() {
     return new Container(
       // red circle
-      child: _centralFigure(figure),
+      child: _centralFigure(),
       decoration: new BoxDecoration(
         color: Colors.red[400],
         shape: BoxShape.circle,
@@ -27,7 +29,7 @@ class Figure extends StatelessWidget {
     );
   }
 
-  Center _centralFigure(String figure) {
+  Center _centralFigure() {
     return new Center(
       child: new Text(
         figure,

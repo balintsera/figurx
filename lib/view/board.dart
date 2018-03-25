@@ -7,11 +7,9 @@ class Board extends StatelessWidget{
   Widget build(BuildContext context) {
     final row = new Row(
       children: <Widget>[
-        _oneRow('First element'),
-        _oneRow('Second element'),
-        new Expanded(
-          child: new Figure(),
-        ),
+        new Expanded(child: new Figure('\u{1f435}')),
+        new Expanded(child: new Figure('\u{1f435}')),
+        new Expanded(child: new Figure('\u{1f435}'))
       ],
     );
     return row;
