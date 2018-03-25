@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class Figure extends StatelessWidget {
   final String figure;
+  final Color borderColor;
+  final Color bgColor;
 
-  Figure(this.figure);
-  
+  Figure(this.figure, this.bgColor, this.borderColor);
+
   @override
   Widget build(BuildContext context) {
     return _circle();
@@ -15,29 +17,29 @@ class Figure extends StatelessWidget {
       // red circle
       child: _centralFigure(),
       decoration: new BoxDecoration(
-        color: Colors.red[400],
+        color: this.bgColor,
         shape: BoxShape.circle,
         border: new Border.all(
-          color: Colors.black,
+          color: this.borderColor,
           width: 16.0,
         ),
       ),
 
       padding: new EdgeInsets.all(16.0),
-      width: 160.0,
-      height: 160.0,
+      margin: new EdgeInsets.all(6.0),
+      width: 140.0,
+      height: 140.0,
     );
   }
 
   Center _centralFigure() {
     return new Center(
-      child: new Text(
-        figure,
-        textAlign: TextAlign.center,
-        style: new TextStyle(
-          fontSize: 50.0,
-        ),
-      )
-    );
+        child: new Text(
+      figure,
+      textAlign: TextAlign.center,
+      style: new TextStyle(
+        fontSize: 45.0,
+      ),
+    ));
   }
 }
