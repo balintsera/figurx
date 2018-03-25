@@ -1,22 +1,22 @@
 import 'dart:math';
 
 class DiceService {
-  var members = new List<int>();
+  var members = new List<String>();
 
-  DiceService(List<int> numbers) {
-    members.addAll(numbers);
+  DiceService(List<String> figures) {
+    members.addAll(figures);
   }
 
-  List<int> throwDice() {
-    return _throwRandomly();
+  List<String> roll() {
+    return _rollRandomly();
   }
 
-  List<int> _throwRandomly() {
+  List<String> _rollRandomly() {
     var rand = new Random();
     int maxMember = members.length;
     // Get the highest number from the list
     print(maxMember.toString());
-    var randMembers = new List<int>();
+    var randMembers = new List<String>();
     for (var i = 0; i < members.length; i++) {
       var random = rand.nextInt(maxMember);
       // find an element that havent beed added to the new list
