@@ -3,21 +3,27 @@ import '../entity/figure.dart';
 import 'dart:math';
 
 class BoardLayout {
-  final availColors = new List<Color>();
-  final availFigures = new List<String>();
+  final List<Color> availColors;
+  final List<String> availFigures;
   final allPermutations = new List<Figure>();
   List<Figure> subSet;
+  static String monkey = '\u{1f435}';
+  static String cat = '\u{1f431}';
+  static String bunny = '\u{1f430}';
+  static String cow = '\u{1f42e}';
 
-  BoardLayout() {
-    availColors.addAll([Colors.lime[200], Colors.deepOrangeAccent, Colors.deepPurple[100]]);
-    final String monkey = '\u{1f435}';
-    final String cat = '\u{1f431}';
-    final String bunny = '\u{1f430}';
-    final String cow = '\u{1f42e}';
-    availFigures.addAll([monkey, cat, bunny, cow]);
-
+  BoardLayout({this.availColors, this.availFigures}) {
     _generateAllPermutations();
   }
+
+  // Initialize with defaults
+  BoardLayout.withDefaults()
+      : availColors = [
+          Colors.lightGreen[300],
+          Colors.deepOrangeAccent[200],
+          Colors.deepPurpleAccent[100]
+        ],
+        availFigures = [monkey, cat, bunny, cow];
 
   List<Figure> randomSubSet(int length) {
     // put some random selected index into a list
@@ -25,7 +31,7 @@ class BoardLayout {
     final random = new Random();
     for (var i = 0; i < length; i++) {
       int rnd = random.nextInt(length);
-      while(indices.indexOf(rnd) > -1) {
+      while (indices.indexOf(rnd) > -1) {
         rnd = random.nextInt(length);
       }
       indices.add(rnd);
@@ -33,7 +39,7 @@ class BoardLayout {
 
     // return the resulted indexed figures from all permutations
     return indices.map((index) => allPermutations[index]).toList();
-  } 
+  }
 
   _generateAllPermutations() {
     for (var bgColor in availColors) {
@@ -43,5 +49,5 @@ class BoardLayout {
         }
       }
     }
-  }  
+  }
 }

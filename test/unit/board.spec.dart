@@ -7,16 +7,26 @@ import "package:test/test.dart";
 // flutter test test/unit/dice_service.dart
 
 void main() {
-  test("String.split() splits the string on the delimiter", () {
-    var string = "foo,bar,baz";
-    expect(string.split(","), equals(["foo", "bar", "baz"]));
-  });
+  test("Generate a simple board with all possible permutations", () {
+    List<Color> availColors = [
+      Colors.lime[200],
+    ];
+    final String monkey = '\u{1f435}';
+    final String cat = '\u{1f431}';
 
-  test("Generate a complete board with all possible permutations", () {
-    BoardLayout layout = new BoardLayout();
-    List<Color> availColors = [Colors.lime[200], Colors.deepOrangeAccent, Colors.deepPurple[100]];
+    List<Figure> expectedPermutations = [
+      new Figure(monkey, availColors[0], availColors[0]),
+      new Figure(cat, availColors[0], availColors[0]),
+    ];
 
-    List<Figure> expectedPermutations = [new Figure("monkey", availColors[0], availColors[0])];
-    expect(layout.allPermutations, equals(expectedPermutations));
+    BoardLayout layout =
+        new BoardLayout(availColors: availColors, availFigures: [monkey, cat]);
+
+    layout.allPermutations.forEach((fig) => print(fig));
+    expect(layout.allPermutations.length, equals(expectedPermutations.length));
+    expect(layout.allPermutations[0].figure,
+        equals(expectedPermutations[0].figure));
+    expect(layout.allPermutations[1].figure,
+        equals(expectedPermutations[1].figure));
   });
 }
