@@ -23,7 +23,9 @@ class BoardLayout {
           Colors.deepOrangeAccent[200],
           Colors.deepPurpleAccent[100]
         ],
-        availFigures = [monkey, cat, bunny, cow];
+        availFigures = [monkey, cat, bunny, cow] {
+    _generateAllPermutations();
+  }
 
   List<Figure> randomSubSet(int length) {
     // put some random selected index into a list

@@ -29,4 +29,11 @@ void main() {
     expect(layout.allPermutations[1].figure,
         equals(expectedPermutations[1].figure));
   });
+  test("Generate the default board", () {
+
+    BoardLayout layout =
+        new BoardLayout.withDefaults();
+
+    expect(layout.allPermutations.length, equals(36));
+  });
 }
