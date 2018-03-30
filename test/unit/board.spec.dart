@@ -22,17 +22,14 @@ void main() {
     BoardLayout layout =
         new BoardLayout(availColors: availColors, availFigures: [monkey, cat]);
 
-    layout.allPermutations.forEach((fig) => print(fig));
     expect(layout.allPermutations.length, equals(expectedPermutations.length));
     expect(layout.allPermutations[0].figure,
         equals(expectedPermutations[0].figure));
     expect(layout.allPermutations[1].figure,
         equals(expectedPermutations[1].figure));
   });
-  test("Generate the default board", () {
-
-    BoardLayout layout =
-        new BoardLayout.withDefaults();
+  test("Generate the default board with 36 elements", () {
+    BoardLayout layout = new BoardLayout.withDefaults();
 
     expect(layout.allPermutations.length, equals(36));
   });
