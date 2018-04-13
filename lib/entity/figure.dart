@@ -6,4 +6,8 @@ class Figure {
   final Color borderColor;
 
   Figure(this.figure, this.bgColor, this.borderColor);
+  @override
+  String toString({DiagnosticLevel minLevel: DiagnosticLevel.debug}) {
+    return "Figure: f: $figure, bg: $bgColor, bo: $borderColor";
+  }
 }

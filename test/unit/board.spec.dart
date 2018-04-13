@@ -33,4 +33,9 @@ void main() {
 
     expect(layout.allPermutations.length, equals(36));
   });
+  test("Pick one randomly from the default 36 elements board", () {
+    BoardLayout layout = new BoardLayout.withDefaults();
+    
+    expect(layout.allPermutations.length, equals(36));
+  });
 }
