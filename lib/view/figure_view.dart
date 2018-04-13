@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Figure extends StatelessWidget {
+class FigureView extends StatelessWidget {
   final String figure;
   final Color borderColor;
   final Color bgColor;
 
-  Figure(this.figure, this.bgColor, this.borderColor);
+  FigureView(this.figure, this.bgColor, this.borderColor);
 
   @override
   Widget build(BuildContext context) {

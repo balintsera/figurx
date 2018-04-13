@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
-import 'figure.dart';
 import '../service/board_layout.dart';
+import 'figure_view.dart';
+import '../entity/figure.dart';
 
 class Board extends StatelessWidget {
-  final String monkey = '\u{1f435}';
-  final String cat = '\u{1f431}';
-  final String bunny = '\u{1f430}';
-  final String cow = '\u{1f42e}';
-
   @override
   Widget build(BuildContext context) {
-    final layout = new BoardLayout();
-    var elements = layout.randomSubSet(9);
-    for (var element in elements) {
-      print(element.figure);
-      print(element.bgColor);
-      print(element.borderColor);
+    final layout = new BoardLayout.withDefaults();
+
+    List<Row> rows = [];
+    // Add figures by three to widgets
+    for (var i = 3; i <= layout.allPermutations.length; i += 3) {
+      var threeFig = layout.allPermutations.getRange(i - 3, i).toList();
+      rows.add(_getOneRow(threeFig));
     }
 
-    final row = new Row(
-      children: <Widget>[
-        new Expanded(child: new Figure(monkey, Colors.lime[200], Colors.black)),
-        new Expanded(
-            child: new Figure(cat, Colors.deepOrangeAccent, Colors.black)),
-        new Expanded(
-            child: new Figure(bunny, Colors.deepPurpleAccent, Colors.black))
-      ],
+    return new Column(
+      children: rows,
     );
-    return row;
   }
 
-  
+  Row _getOneRow(List<Figure> figures) {
+    return new Row(children: [
+      new Expanded(
+          child: new FigureView(
+              figures[0].figure, figures[0].bgColor, figures[0].borderColor)),
+      new Expanded(
+          child: new FigureView(
+              figures[1].figure, figures[1].bgColor, figures[1].borderColor)),
+      new Expanded(
+          child: new FigureView(
+              figures[2].figure, figures[2].bgColor, figures[2].borderColor)),
+    ]);
+  }
 }
