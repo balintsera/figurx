@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../service/dice_service.dart';
 
-class Dice extends StatelessWidget {
+class DiceView extends StatelessWidget {
 
   final String monkey = '\u{1f435}'; 
   final String cat = '\u{1f431}'; 

@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'game.dart';
 import '../service/board_layout.dart';
 import 'figure_view.dart';
+import './dice_view.dart';
 import '../entity/figure.dart';
 
 class Board extends State<Game> {
   int numRows = 5; 
+
   @override
   Widget build(BuildContext context) {
     final layout = new BoardLayout.withDefaults();
     List<Figure> randomlyOrdered = layout.randomSubSet(layout.allPermutations.length);
     List<Row> rows = [];
+    // add dice first
+    rows.add(new Row(children: [new DiceView()]));
     // Add figures by three to widgets
     for (var i = numRows; i <= randomlyOrdered.length; i += numRows) {
       var threeFig = randomlyOrdered.getRange(i - numRows, i).toList();
