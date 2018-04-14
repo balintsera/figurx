@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'game.dart';
 import '../service/board_layout.dart';
 import 'figure_view.dart';
 import '../entity/figure.dart';
 
-class Board extends StatelessWidget {
+class Board extends State<Game> {
+  int numRows = 5; 
   @override
   Widget build(BuildContext context) {
     final layout = new BoardLayout.withDefaults();
-
+    List<Figure> randomlyOrdered = layout.randomSubSet(layout.allPermutations.length);
     List<Row> rows = [];
     // Add figures by three to widgets
-    for (var i = 3; i <= layout.allPermutations.length; i += 3) {
-      var threeFig = layout.allPermutations.getRange(i - 3, i).toList();
+    for (var i = numRows; i <= randomlyOrdered.length; i += numRows) {
+      var threeFig = randomlyOrdered.getRange(i - numRows, i).toList();
       rows.add(_getOneRow(threeFig));
     }
 
@@ -21,16 +23,14 @@ class Board extends StatelessWidget {
   }
 
   Row _getOneRow(List<Figure> figures) {
-    return new Row(children: [
-      new Expanded(
+    List<Expanded> children = [];
+    for (var i = 0; i < numRows; i++) {
+      var expanded = new Expanded(
           child: new FigureView(
-              figures[0].figure, figures[0].bgColor, figures[0].borderColor)),
-      new Expanded(
-          child: new FigureView(
-              figures[1].figure, figures[1].bgColor, figures[1].borderColor)),
-      new Expanded(
-          child: new FigureView(
-              figures[2].figure, figures[2].bgColor, figures[2].borderColor)),
-    ]);
+              figures[i].figure, figures[i].bgColor, figures[i].borderColor)
+      );
+      children.add(expanded);
+    }
+    return new Row(children: children);
   }
 }

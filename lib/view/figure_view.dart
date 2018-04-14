@@ -7,6 +7,12 @@ class FigureView extends StatelessWidget {
 
   FigureView(this.figure, this.bgColor, this.borderColor);
 
+  double borderHeight = 10.0;
+  double padding = 4.0;
+  double margin = 4.0;
+  double fontSize = 20.0;
+  double width = 60.0;
+
   @override
   Widget build(BuildContext context) {
     return _circle();
@@ -21,14 +27,14 @@ class FigureView extends StatelessWidget {
         shape: BoxShape.circle,
         border: new Border.all(
           color: this.borderColor,
-          width: 16.0,
+          width: borderHeight,
         ),
       ),
 
-      padding: new EdgeInsets.all(16.0),
-      margin: new EdgeInsets.all(6.0),
-      width: 140.0,
-      height: 140.0,
+      padding: new EdgeInsets.all(padding),
+      margin: new EdgeInsets.all(margin),
+      width: width,
+      height: width,
     );
   }
 
@@ -38,7 +44,7 @@ class FigureView extends StatelessWidget {
       figure,
       textAlign: TextAlign.center,
       style: new TextStyle(
-        fontSize: 45.0,
+        fontSize: fontSize,
       ),
     ));
   }

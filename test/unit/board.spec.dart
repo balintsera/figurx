@@ -31,11 +31,12 @@ void main() {
   test("Generate the default board with 36 elements", () {
     BoardLayout layout = new BoardLayout.withDefaults();
 
-    expect(layout.allPermutations.length, equals(36));
+    expect(layout.allPermutations.length, equals(72));
   });
-  test("Pick one randomly from the default 36 elements board", () {
+  test("Randomize the default 36 elements order", () {
     BoardLayout layout = new BoardLayout.withDefaults();
-    
-    expect(layout.allPermutations.length, equals(36));
+    List<Figure> randomSet = layout.randomSubSet(36);
+    // Without randomization the first three figure
+    // has the same border and backround
   });
 }

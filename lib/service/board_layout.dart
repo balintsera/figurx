@@ -11,6 +11,10 @@ class BoardLayout {
   static String cat = '\u{1f431}';
   static String bunny = '\u{1f430}';
   static String cow = '\u{1f42e}';
+  static String letter_l = "L";
+  static String letter_u = "U";
+  static String letter_c = "C";
+  static String letter_a = "A";
 
   BoardLayout({this.availColors, this.availFigures}) {
     _generateAllPermutations();
@@ -23,7 +27,16 @@ class BoardLayout {
           Colors.deepOrangeAccent[200],
           Colors.deepPurpleAccent[100]
         ],
-        availFigures = [monkey, cat, bunny, cow] {
+        availFigures = [
+          letter_l,
+          letter_u,
+          letter_c,
+          letter_a,
+          monkey,
+          cat,
+          bunny,
+          cow
+        ] {
     _generateAllPermutations();
   }
 
