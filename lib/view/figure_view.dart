@@ -12,22 +12,22 @@ class FigureView extends StatelessWidget {
     bgColor = figure.bgColor;
   }
 
-  FigureView.hideCenter(Figure figure) {
-    center = "";
-    borderColor = figure.borderColor;
-    bgColor = figure.bgColor;
-  }
-
-  FigureView.hideBg(Figure figure) {
+  FigureView.showCenter(Figure figure) {
     center = figure.figure;
-    borderColor = figure.borderColor;
+    borderColor = figure.borderColor.withOpacity(0.0);
     bgColor = figure.bgColor.withOpacity(0.0);
   }
 
-  FigureView.hideBorder(Figure figure) {
+  FigureView.showBg(Figure figure) {
     center = "";
     borderColor = figure.borderColor.withOpacity(0.0);
     bgColor = figure.bgColor;
+  }
+
+  FigureView.showBorder(Figure figure) {
+    center = "";
+    borderColor = figure.borderColor;
+    bgColor = figure.bgColor.withOpacity(0.0);
   }
 
   double borderHeight = 10.0;
@@ -64,11 +64,11 @@ class FigureView extends StatelessWidget {
   Center _centralFigure() {
     return new Center(
         child: new Text(
-          center,
-          textAlign: TextAlign.center,
-          style: new TextStyle(
-            fontSize: fontSize,
-          ),
+      center,
+      textAlign: TextAlign.center,
+      style: new TextStyle(
+        fontSize: fontSize,
+      ),
     ));
   }
 }

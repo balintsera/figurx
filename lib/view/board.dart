@@ -28,4 +28,5 @@ class Board extends State<Game> {
 
     return new Column(children: rows);
   }
+
 }
