@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import '../entity/figure.dart';
-import 'figure_view.dart';
 import 'figure_row.dart';
+import 'figure_view.dart';
 
 class DiceView extends StatelessWidget {
   Color border;
   Color background;
   String center;
 
-  DiceView(this.center, this.background, this.border) {
-    
+  DiceView(Figure figure) {
+    center = figure.figure;
+    border = figure.borderColor;
+    background = figure.bgColor;
   }
 
   @override
   Widget build(BuildContext context) {
-    var figures = new List<Figure>();
+    var figures = new List<FigureView>();
+    Figure fig = new Figure(center, background, border);
     figures.addAll([
-      new Figure(center, background.withOpacity(0.0), border.withOpacity(0.0)),
-      new Figure("", background, border.withOpacity(0.0)),
-      new Figure("", background.withOpacity(0.0), border)
+      new FigureView.hideCenter(fig),
+      new FigureView.hideBorder(fig),
+      new FigureView.hideBg(fig)
     ]);
 
     return new Column(
