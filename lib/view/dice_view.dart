@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import '../service/dice_service.dart';
+import 'figure_view.dart';
 
 class DiceView extends StatelessWidget {
+  final Color border = Colors.orangeAccent.withOpacity(0.0);
+  final Color background = Colors.orangeAccent.withOpacity(0.0);
+  final String center = "";
 
-  final String monkey = '\u{1f435}'; 
-  final String cat = '\u{1f431}'; 
-  final String bunny = '\u{1f430}'; 
-  final String cow = '\u{1f42e}';
-  
+  DiceView(center, background, border);
+
   @override
   Widget build(BuildContext context) {
-    var figures = new List<String>();
-    figures.addAll([monkey, cat, bunny, cow]);
-    var diceService = new DiceService(figures);
+    var figures = new List<FigureView>();
+    figures.addAll([
+      new FigureView(center, background, border),
+      new FigureView("", background, border),
+      new FigureView("", background, border)
+    ]);
+
     return new Center(
-      child: new Text('Dis is de dice: ' + diceService.roll().toString()),
+      child: new Text('Dis is de dice: '),
     );
   }
 }

@@ -1,40 +1,29 @@
 import 'package:flutter/material.dart';
 import 'game.dart';
 import '../service/board_layout.dart';
-import 'figure_view.dart';
 import './dice_view.dart';
 import '../entity/figure.dart';
+import 'figure_row.dart';
 
 class Board extends State<Game> {
-  int numRows = 5; 
+  int numRows = 5;
 
   @override
   Widget build(BuildContext context) {
     final layout = new BoardLayout.withDefaults();
-    List<Figure> randomlyOrdered = layout.randomSubSet(layout.allPermutations.length);
-    List<Row> rows = [];
-    // add dice first
-    rows.add(new Row(children: [new DiceView()]));
+    List<Figure> randomlyOrdered =
+        layout.randomSubSet(layout.allPermutations.length);
+    List<Widget> rows = [];
+
+    // add dice as row
+    rows.add(new DiceView(randomlyOrdered[3].figure, randomlyOrdered[3].bgColor, randomlyOrdered[3].borderColor));
+
     // Add figures by three to widgets
     for (var i = numRows; i <= randomlyOrdered.length; i += numRows) {
-      var threeFig = randomlyOrdered.getRange(i - numRows, i).toList();
-      rows.add(_getOneRow(threeFig));
+      var figs = randomlyOrdered.getRange(i - numRows, i).toList();
+      rows.add(new FigureRow(figs, numRows));
     }
 
-    return new Column(
-      children: rows,
-    );
-  }
-
-  Row _getOneRow(List<Figure> figures) {
-    List<Expanded> children = [];
-    for (var i = 0; i < numRows; i++) {
-      var expanded = new Expanded(
-          child: new FigureView(
-              figures[i].figure, figures[i].bgColor, figures[i].borderColor)
-      );
-      children.add(expanded);
-    }
-    return new Row(children: children);
+    return new Column(children: rows);
   }
 }

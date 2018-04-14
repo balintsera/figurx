@@ -12,7 +12,7 @@ class FigureView extends StatelessWidget {
   double margin = 4.0;
   double fontSize = 20.0;
   double width = 60.0;
-
+  
   @override
   Widget build(BuildContext context) {
     return _circle();
@@ -41,11 +41,11 @@ class FigureView extends StatelessWidget {
   Center _centralFigure() {
     return new Center(
         child: new Text(
-      figure,
-      textAlign: TextAlign.center,
-      style: new TextStyle(
-        fontSize: fontSize,
-      ),
+          figure,
+          textAlign: TextAlign.center,
+          style: new TextStyle(
+            fontSize: fontSize,
+          ),
     ));
   }
 }
