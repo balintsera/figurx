@@ -8,7 +8,7 @@ class Dice {
   List<Figure> usedPerms = [];
   final random = new Random();
   Dice.fromBoard(BoardLayout layout) {
-    allPerms = layout.allPermutations;
+    allPerms = layout.subSet;
   }
 
   Figure roll() {

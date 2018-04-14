@@ -35,7 +35,6 @@ void main() {
   });
   test("Randomize the default 36 elements order", () {
     BoardLayout layout = new BoardLayout.withDefaults();
-    List<Figure> randomSet = layout.randomSubSet(36);
     // Without randomization the first three figure
     // has the same border and backround
   });

@@ -4,21 +4,38 @@ import '../service/board_layout.dart';
 import './dice_view.dart';
 import 'figure_row.dart';
 import 'figure_view.dart';
+import '../entity/dice.dart';
+import 'dart:async';
+import '../entity/figure.dart';
 
 class Board extends State<Game> {
-  int numRows = 5;
+  final int numRows = 5;
+  final int secondsBetweenRolls = 5;
+  final int figuresNum = 40;
+  Dice dice;
+  Figure currentDice;
+  final layout;
+  List<FigureView> randomlyOrdered;
+
+  Board():
+    layout = new BoardLayout.withDefaults()
+   {
+    randomlyOrdered = layout
+        .subSet
+        .map((fig) => new FigureView(fig))
+        .toList();
+    dice = new Dice.fromBoard(layout); 
+    currentDice = dice.roll();   
+    }
 
   @override
   Widget build(BuildContext context) {
-    final layout = new BoardLayout.withDefaults();
-    List<FigureView> randomlyOrdered = layout
-        .randomSubSet(layout.allPermutations.length)
-        .map((fig) => new FigureView(fig))
-        .toList();
+    
     List<Widget> rows = [];
 
     // add dice as row
-    rows.add(new DiceView(layout.allPermutations[10]));
+    rows.add(new DiceView(currentDice));
+    _startDiceInterval();
 
     // Add figures by three to widgets
     for (var i = numRows; i <= randomlyOrdered.length; i += numRows) {
@@ -29,4 +46,9 @@ class Board extends State<Game> {
     return new Column(children: rows);
   }
 
+  _startDiceInterval() {
+    new Timer(new Duration(seconds: secondsBetweenRolls), () {
+      setState(() => currentDice = dice.roll());
+    });
+  }
 }

@@ -7,6 +7,7 @@ class BoardLayout {
   final List<String> availFigures;
   final allPermutations = new List<Figure>();
   List<Figure> subSet;
+  int subSetLength = 40; 
   static String monkey = '\u{1f435}';
   static String cat = '\u{1f431}';
   static String bunny = '\u{1f430}';
@@ -16,7 +17,7 @@ class BoardLayout {
   static String letter_c = "C";
   static String letter_a = "A";
 
-  BoardLayout({this.availColors, this.availFigures}) {
+  BoardLayout({this.availColors, this.availFigures, this.subSetLength}) {
     _generateAllPermutations();
   }
 
@@ -38,9 +39,10 @@ class BoardLayout {
           cow
         ] {
     _generateAllPermutations();
+    subSet = _randomSubSet(subSetLength);
   }
 
-  List<Figure> randomSubSet(int length) {
+  List<Figure> _randomSubSet(int length) {
     // put some random selected index into a list
     var indices = [];
     final random = new Random();
