@@ -7,6 +7,7 @@ import 'figure_view.dart';
 import '../entity/dice.dart';
 import 'dart:async';
 import '../entity/figure.dart';
+import 'message.dart';
 
 class Board extends State<Game> {
   final int numRows = 5;
@@ -16,6 +17,8 @@ class Board extends State<Game> {
   Figure currentDice;
   final layout;
   List<FigureView> randomlyOrdered;
+  String _message = "Find it";
+  Figure _selected;
 
   Board():
     layout = new BoardLayout.withDefaults()
@@ -32,6 +35,9 @@ class Board extends State<Game> {
   Widget build(BuildContext context) {
     
     List<Widget> rows = [];
+
+    // add message 
+    rows.add(new Message(_message));
 
     // add dice as row
     rows.add(new DiceView(currentDice));
@@ -50,5 +56,16 @@ class Board extends State<Game> {
     new Timer(new Duration(seconds: secondsBetweenRolls), () {
       setState(() => currentDice = dice.roll());
     });
+  }
+
+  _handleFigureTap(Figure tapped) {
+    _selected = tapped;
+    String message;
+    if (_selected == currentDice ) {
+      message = ":)";
+    } else {
+      message = ":(";
+    }
+    setState(() => _message = message);
   }
 }
