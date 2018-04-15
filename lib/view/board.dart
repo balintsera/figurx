@@ -14,34 +14,31 @@ class Board extends State<Game> {
   final int secondsBetweenRolls = 5;
   final int figuresNum = 40;
   Dice dice;
-  Figure currentDice;
+  Figure _currentFigure;
   final layout;
   List<FigureView> randomlyOrdered;
   String _message = "Find it";
   Figure _selected;
+  StreamSubscription _interval;
 
-
-  Board():
-    layout = new BoardLayout.withDefaults()
-   {
-    randomlyOrdered = layout
-        .subSet
-        .map((fig) => new FigureView(figure: fig, onFigureTap: _handleFigureTap))
+  Board() : layout = new BoardLayout.withDefaults() {
+    randomlyOrdered = layout.subSet
+        .map(
+            (fig) => new FigureView(figure: fig, onFigureTap: _handleFigureTap))
         .toList();
-    dice = new Dice.fromBoard(layout); 
-    currentDice = dice.roll();   
-    }
+    dice = new Dice.fromBoard(layout);
+    _currentFigure = dice.roll();
+  }
 
   @override
   Widget build(BuildContext context) {
-    
     List<Widget> rows = [];
 
-    // add message 
+    // add message
     rows.add(new Message(_message));
 
     // add dice as row
-    rows.add(new DiceView(currentDice));
+    rows.add(new DiceView(_currentFigure));
     _startDiceInterval();
 
     // Add figures by three to widgets
@@ -53,20 +50,33 @@ class Board extends State<Game> {
     return new Column(children: rows);
   }
 
-  _startDiceInterval() {
-    new Timer(new Duration(seconds: secondsBetweenRolls), () {
-      setState(() => currentDice = dice.roll());
+  void _startDiceInterval() {
+    _interval = new Stream.periodic(const Duration(seconds: 5), (v) => v)
+        .listen((count) {
+      print('tick $count');
+
+      setState(() {
+        _resetSession("find it");
+      });
     });
   }
 
   void _handleFigureTap(Figure tapped) {
     _selected = tapped;
     String message;
-    if (_selected == currentDice ) {
+    if (_selected == _currentFigure) {
       message = ":)";
     } else {
       message = ":(";
     }
-    setState(() => _message = message);
+    setState(() {
+      _resetSession(message);
+    });
+  }
+
+  void _resetSession(message) { 
+    _message = message;
+    _currentFigure = dice.roll();
+    _interval.cancel();
   }
 }
