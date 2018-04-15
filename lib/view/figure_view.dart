@@ -2,32 +2,38 @@ import 'package:flutter/material.dart';
 import '../entity/figure.dart';
 
 class FigureView extends StatelessWidget {
+  Figure figure;
   String center;
   Color borderColor;
   Color bgColor;
+  var _onTap;
 
-  FigureView(Figure figure) {
+  FigureView({ this.figure, onFigureTap }) {
     center = figure.figure;
     borderColor = figure.borderColor;
     bgColor = figure.bgColor;
+    _onTap = onFigureTap;
   }
 
-  FigureView.showCenter(Figure figure) {
+  FigureView.showCenter({ this.figure, onFigureTap }) {
     center = figure.figure;
     borderColor = figure.borderColor.withOpacity(0.0);
     bgColor = figure.bgColor.withOpacity(0.0);
+    _onTap = onFigureTap;
   }
 
-  FigureView.showBg(Figure figure) {
+  FigureView.showBg({ this.figure, onFigureTap }) {
     center = "";
     borderColor = figure.borderColor.withOpacity(0.0);
     bgColor = figure.bgColor;
+    _onTap = onFigureTap;
   }
 
-  FigureView.showBorder(Figure figure) {
+  FigureView.showBorder({ Figure figure, onFigureTap }) {
     center = "";
     borderColor = figure.borderColor;
     bgColor = figure.bgColor.withOpacity(0.0);
+    _onTap = onFigureTap;
   }
 
   double borderHeight = 10.0;
@@ -38,7 +44,10 @@ class FigureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _circle();
+    return new GestureDetector(
+      onTap: _handleTap,
+      child:_circle()
+    );
   }
 
   Container _circle() {
@@ -70,5 +79,9 @@ class FigureView extends StatelessWidget {
         fontSize: fontSize,
       ),
     ));
+  }
+
+  _handleTap() {
+    _onTap(figure);
   }
 }

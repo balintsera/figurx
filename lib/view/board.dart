@@ -20,12 +20,13 @@ class Board extends State<Game> {
   String _message = "Find it";
   Figure _selected;
 
+
   Board():
     layout = new BoardLayout.withDefaults()
    {
     randomlyOrdered = layout
         .subSet
-        .map((fig) => new FigureView(fig))
+        .map((fig) => new FigureView(figure: fig, onFigureTap: _handleFigureTap))
         .toList();
     dice = new Dice.fromBoard(layout); 
     currentDice = dice.roll();   
@@ -58,7 +59,7 @@ class Board extends State<Game> {
     });
   }
 
-  _handleFigureTap(Figure tapped) {
+  void _handleFigureTap(Figure tapped) {
     _selected = tapped;
     String message;
     if (_selected == currentDice ) {

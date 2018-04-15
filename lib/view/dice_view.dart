@@ -19,9 +19,9 @@ class DiceView extends StatelessWidget {
     var figures = new List<FigureView>();
     Figure fig = new Figure(center, background, border);
     figures.addAll([
-      new FigureView.showCenter(fig),
-      new FigureView.showBorder(fig),
-      new FigureView.showBg(fig)
+      new FigureView.showCenter(figure: fig),
+      new FigureView.showBorder(figure: fig),
+      new FigureView.showBg(figure: fig)
     ]);
 
     return new Column(

@@ -4,6 +4,7 @@ import 'figure_view.dart';
 class FigureRow extends StatelessWidget {
   final List<FigureView> figureViews;
   final int numRows;
+  var onFigureTap;
   
   FigureRow(this.figureViews, this.numRows);
 
