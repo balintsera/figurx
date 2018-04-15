@@ -12,14 +12,13 @@ import 'message.dart';
 class Board extends State<Game> {
   final int numRows = 5;
   final int secondsBetweenRolls = 5;
-  final int figuresNum = 40;
   Dice dice;
   Figure _currentFigure;
   final layout;
   List<FigureView> randomlyOrdered;
   String _message = "Find it";
   Figure _selected;
-  StreamSubscription _interval;
+  Timer _timer;
 
   Board() : layout = new BoardLayout.withDefaults() {
     randomlyOrdered = layout.subSet
@@ -51,13 +50,8 @@ class Board extends State<Game> {
   }
 
   void _startDiceInterval() {
-    _interval = new Stream.periodic(const Duration(seconds: 5), (v) => v)
-        .listen((count) {
-      print('tick $count');
-
-      setState(() {
-        _resetSession("find it");
-      });
+    _timer = new Timer.periodic(new Duration(seconds: secondsBetweenRolls), (_) {
+      setState(() => _resetSession("find it"));
     });
   }
 
@@ -74,9 +68,10 @@ class Board extends State<Game> {
     });
   }
 
-  void _resetSession(message) { 
+  void _resetSession(message) {
+    print("Reset session");
     _message = message;
     _currentFigure = dice.roll();
-    _interval.cancel();
+    _timer.cancel();
   }
 }

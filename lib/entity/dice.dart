@@ -13,6 +13,15 @@ class Dice {
 
   Figure roll() {
     int max = allPerms.length;
+    print(max);
+    // time to time we run out of unused permutations
+    // so we put everything back into unused from used
+    if (max < 1) {
+      allPerms.addAll(usedPerms);
+      max = allPerms.length;
+      usedPerms = [];
+    }
+
     int selectedInd = random.nextInt(max);
     Figure selected = allPerms[selectedInd];
     allPerms.removeAt(selectedInd);
